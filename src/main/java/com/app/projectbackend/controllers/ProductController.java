@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
-public class ShopController {
+public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
@@ -27,20 +27,20 @@ public class ShopController {
         return "shop-main";
     }
 
-    @GetMapping("/shop/add")
-    public String shopAdd(Model model) {
-        return "shop-add";
+    @GetMapping("/product/add")
+    public String productAdd(Model model) {
+        return "product-add";
     }
 
-    @PostMapping("shop/add")
+    @PostMapping("product/add")
     public String shopProductAdd(@RequestParam String title, @RequestParam BigDecimal price, @RequestParam String description, Model model) {
         Product product = new Product(title, price, description);
         productRepository.save(product);
         return "redirect:/shop";
     }
 
-    @GetMapping("/shop/{id}")
-    public String shopDetails(@PathVariable(value = "id") long id, Model model) {
+    @GetMapping("/product/{id}")
+    public String productDetails(@PathVariable(value = "id") long id, Model model) {
         if (!productRepository.existsById(id)) {
             return "redirect:/shop";
         }
@@ -48,6 +48,6 @@ public class ShopController {
         ArrayList<Product> res = new ArrayList<>();
         product.ifPresent(res::add);
         model.addAttribute("product", res);
-        return "shop-details";
+        return "product-details";
     }
 }
