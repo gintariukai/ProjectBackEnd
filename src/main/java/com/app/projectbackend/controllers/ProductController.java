@@ -19,8 +19,12 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @GetMapping("/shop")
     public String shopMain(Model model) {
@@ -35,7 +39,7 @@ public class ProductController {
     }
 
     @PostMapping("product/add")
-    public String shopProductAdd(@RequestParam String title, @RequestParam BigDecimal price, @RequestParam String description, Model model) {
+    public String shopProductAdd(@RequestParam String title, @RequestParam BigDecimal price, @RequestParam String description) {
         Product product = new Product(title, price, description);
         productRepository.save(product);
         return "redirect:/shop";
