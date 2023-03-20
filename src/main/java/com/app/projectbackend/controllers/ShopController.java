@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class ShopController {
@@ -34,5 +37,17 @@ public class ShopController {
         Product product = new Product(title, price, description);
         productRepository.save(product);
         return "redirect:/shop";
+    }
+
+    @GetMapping("/shop/{id}")
+    public String shopDetails(@PathVariable(value = "id") long id, Model model) {
+        if (!productRepository.existsById(id)) {
+            return "redirect:/shop";
+        }
+        Optional<Product> product = productRepository.findById(id);
+        ArrayList<Product> res = new ArrayList<>();
+        product.ifPresent(res::add);
+        model.addAttribute("product", res);
+        return "shop-details";
     }
 }
