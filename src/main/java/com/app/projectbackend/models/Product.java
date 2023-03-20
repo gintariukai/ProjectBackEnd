@@ -21,4 +21,9 @@ public class Product {
     private int views;
     private BigDecimal price;
 
+    public Product(String title, BigDecimal price, String description) {
+        this.title = title;
+        this.price = price;
+        this.description = description;
+    }
 }
