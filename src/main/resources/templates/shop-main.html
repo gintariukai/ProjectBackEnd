@@ -13,7 +13,7 @@
     <h1>Shop pages</h1>
     <div th:each="el : ${products}" class="alert alert-info mt-2">
         <h3 th:text="${el.title}"/>
-        <p th:text="${el.price}"/>
+        <p><b>Price:</b> <span th:text="${el.price}"/></p>
         <a th:href="'/product/' + ${el.id}" class="btn btn-warning">Description</a>
     </div>
 </div>

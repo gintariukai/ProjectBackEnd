@@ -13,10 +13,12 @@
     <div th:each="el : ${product}" class="alert alert-info mt-2">
         <h1 th:text="${el.title}"/>
         <p th:text="${el.description}"/>
-        <p th:text="${el.price}"/>
-        <p th:text="${el.views}"/>
-        <a th:href="'/product/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
-        <a th:href="'/product/' + ${el.id} + '/remove'" class="btn btn-warning">Remove product</a>
+        <p><b>Price:</b> <span th:text="${el.price}"/></p>
+        <p><b>Views:</b> <span th:text="${el.views}"/></p>
+        <a th:href="'/product/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a><br><br>
+        <form th:action="'/product/' + ${el.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">Remove product</button>
+        </form>
     </div>
 </div>
 
