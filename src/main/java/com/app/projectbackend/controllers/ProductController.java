@@ -2,6 +2,8 @@ package com.app.projectbackend.controllers;
 
 import com.app.projectbackend.models.Product;
 import com.app.projectbackend.repo.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.RowId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
